@@ -4,6 +4,7 @@ let inputField = document.getElementById('inputField');
 
 //create function
 const event1 = function () {
+   if(inputField.value) {
     let paragraph = document.createElement('p'); //everytime we push this butto a new paragraph will be created with document.createElement('p')
     paragraph.classList.add("paragraph-styling");//grabs the style in the css file and adds it to  this paragraph
     paragraph.innerText = inputField.value;// adds the input field value -what ever you type in the input- to the paragraph 
@@ -16,30 +17,18 @@ const event1 = function () {
     paragraph.addEventListener("dblclick", () => {
         toDoContainer.removeChild(paragraph);
     })
+}else {
+    alert("The field can not be empty");
+};
 };
 
 addToDoButton.addEventListener("click", function () {
     event1();
 })
-    // // let btn = document.querySelector('button');
-    // let result = document.querySelector('h1');
     
     document.body.addEventListener("keypress", (e) => {
         if(e.key === "Enter") {
-            if(inputField.value) {
             event1();
-            }else{
-                
-            };
-            // result.innerText = "Enter Key Pressed"
-            
-            // if (inputField.value) {//if there is something in the input then
-            // let paragraph = document.createElement('p');
-            // paragraph.innerText = inputField.value;
-            // toDoContainer.appendChild(paragraph);
-            // inputField.value = "";
-            // }else{//if there is nothing there then do nothing or alert
-                
-            // }
-        }
+            }else{         
+            }
     })
