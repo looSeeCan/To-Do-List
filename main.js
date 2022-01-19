@@ -4,31 +4,27 @@ let inputField = document.getElementById('inputField');
 
 //create function
 const event1 = function () {
-   if(inputField.value) {
-    let paragraph = document.createElement('p'); //everytime we push this butto a new paragraph will be created with document.createElement('p')
-    paragraph.classList.add("paragraph-styling");//grabs the style in the css file and adds it to  this paragraph
-    paragraph.innerText = inputField.value;// adds the input field value -what ever you type in the input- to the paragraph 
-    toDoContainer.appendChild(paragraph);//we need to append the paragraph to our toDoContainer. puts the paragraph that was created into the div class toDoContainer
-    inputField.value = "";//empties the input field after each click 
-    paragraph.addEventListener("click", function () {
-        paragraph.style.textDecoration = "line-through";//when the paragraph word is clicked, a line will cross thru it. indicating the task is complete
-    
-    })
-    paragraph.addEventListener("dblclick", () => {
-        toDoContainer.removeChild(paragraph);
-    })
-}else {
-    alert("The field can not be empty");
-};
+
+    if(inputField.value) {
+        let paragraph = document.createElement('p'); //everytime we push this butto a new paragraph will be created with document.createElement('p')
+        paragraph.classList.add("paragraph-styling");//grabs the style in the css file and adds it to  this paragraph
+        paragraph.innerText = inputField.value;// adds the input field value -what ever you type in the input- to the paragraph 
+        toDoContainer.appendChild(paragraph);//we need to append the paragraph to our toDoContainer. puts the paragraph that was created into the div class toDoContainer
+        inputField.value = "";//empties the input field after each click 
+        paragraph.addEventListener("click", function () {
+            paragraph.style.textDecoration = "line-through";//when the paragraph word is clicked, a line will cross thru it. indicating the task is complete
+        
+        })
+        paragraph.addEventListener("dblclick", () => {
+            toDoContainer.removeChild(paragraph);
+        })}else {
+            alert("The field can not be empty")
+        };
+        
 };
 
-addToDoButton.addEventListener("click", function () {
-    event1();
-})
-    
-    document.body.addEventListener("keypress", (e) => {
-        if(e.key === "Enter") {
-            event1();
-            }else{         
-            }
-    })
+addToDoButton.addEventListener("click", () => event1());
+
+document.body.addEventListener("keypress", (e) => e.key === "Enter" ? event1():console.log('nothing'));    
+
+
