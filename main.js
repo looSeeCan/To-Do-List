@@ -1,30 +1,63 @@
-let addToDoButton = document.getElementById("addToDo");
+let addToDoButton = document.getElementById("addToDo"); //this is for the button. id = addToDo.
 let toDoContainer = document.getElementById('toDoContainer');
 let inputField = document.getElementById('inputField');
 
-//create function
-const event1 = function () {
+//create function here so I do not have to repeat
+const appendToDoContainer = function (item) {
+    toDoContainer.appendChild(item);//we need to append the paragraph to our toDoContainer. puts the paragraph that was created into the div class toDoContainer
+        inputField.value = "";//empties the input field after each click 
+        item.addEventListener("click", function () {
+            item.style.textDecoration = "line-through";//when the paragraph word is clicked, a line will cross thru it. indicating the task is complete
+        })
+        item.addEventListener("dblclick", () => {
+            toDoContainer.removeChild(item);
+        })
+};
 
+//<p>
+const p = function () {
     if(inputField.value) {
         let paragraph = document.createElement('p'); //everytime we push this butto a new paragraph will be created with document.createElement('p')
         paragraph.classList.add("paragraph-styling");//grabs the style in the css file and adds it to  this paragraph
         paragraph.innerText = inputField.value;// adds the input field value -what ever you type in the input- to the paragraph 
-        toDoContainer.appendChild(paragraph);//we need to append the paragraph to our toDoContainer. puts the paragraph that was created into the div class toDoContainer
-        inputField.value = "";//empties the input field after each click 
-        paragraph.addEventListener("click", function () {
-            paragraph.style.textDecoration = "line-through";//when the paragraph word is clicked, a line will cross thru it. indicating the task is complete
-        
-        })
-        paragraph.addEventListener("dblclick", () => {
-            toDoContainer.removeChild(paragraph);
-        })}else {
-            alert("The field can not be empty")
-        };
-        
+    }else {
+        alert("The field can not be empty ");
+    };            
+};    
+
+//<ul>
+const createList = function () {
+    if (inputField.value) {
+    let listView = document.createElement('ul');
+        let listViewItem=document.createElement('li');
+        listViewItem.appendChild(document.createTextNode(inputField.value));
+        listView.appendChild(listViewItem);
+        // toDoContainer.appendChild(listView)       
+        // inputField.value = "";
+        appendToDoContainer(listView);
+    }else {
+        alert("The field is empty");
+    };
 };
 
-addToDoButton.addEventListener("click", () => event1());
 
-document.body.addEventListener("keypress", (e) => e.key === "Enter" ? event1():console.log('nothing'));    
+addToDoButton.addEventListener("click", function () { 
+        createList();
+        // p();
+})
+
+inputField.addEventListener('keypress', function (e) {
+    if (e.key === "Enter")  {
+        createList();
+        // p()
+    }else{
+    };
+})
+
+
+// addToDoButton.addEventListener("click", () => event1());
+
+// document.body.addEventListener("keypress", (e) => e.key === "Enter" ? createList():console.log(''));    
+
 
 
